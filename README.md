@@ -15,6 +15,9 @@
 (명명 규칙: 레포별로 `<주제>_app.py` 형태의 고유 이름을 쓴다.)
 
 ```bash
+cd C:\Users\mungn
+git clone https://github.com/mungn0603-code/chemical_reactor_parameter_optimization_platform.git
+cd chemical_reactor_parameter_optimization_platform
 pip install -r requirements.txt
 streamlit run chemical_reactor_app.py
 ```
