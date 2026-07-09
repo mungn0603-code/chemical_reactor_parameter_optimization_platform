@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Coverage for reactor_platform/parameters/validators.py: 97%</title>
+    <link rel="icon" sizes="32x32" href="favicon_32_cb_c827f16f.png">
+    <link rel="stylesheet" href="style_cb_4667309f.css" type="text/css">
+    <script src="coverage_html_cb_dd2e7eb5.js" defer></script>
+</head>
+<body class="pyfile">
+<header>
+    <div class="content">
+        <h1>
+            <span class="text">Coverage for </span><b>reactor_platform<span class="sep">/</span>parameters<span class="sep">/</span>validators.py</b>:
+            <span class="pc_cov">97%</span>
+        </h1>
+        <aside id="help_panel_wrapper">
+            <input id="help_panel_state" type="checkbox">
+            <label for="help_panel_state">
+                <img id="keyboard_icon" src="keybd_closed_cb_900cfef5.png" alt="Show/hide keyboard shortcuts">
+            </label>
+            <div id="help_panel">
+                <p class="legend">Shortcuts on this page</p>
+                <div class="keyhelp">
+                    <p>
+                        <kbd>r</kbd>
+                        <kbd>m</kbd>
+                        <kbd>x</kbd>
+                        &nbsp; toggle line displays
+                    </p>
+                    <p>
+                        <kbd>j</kbd>
+                        <kbd>k</kbd>
+                        &nbsp; next/prev highlighted chunk
+                    </p>
+                    <p>
+                        <kbd>0</kbd> &nbsp; (zero) top of page
+                    </p>
+                    <p>
+                        <kbd>1</kbd> &nbsp; (one) first highlighted chunk
+                    </p>
+                    <p>
+                        <kbd>[</kbd>
+                        <kbd>]</kbd>
+                        &nbsp; prev/next file
+                    </p>
+                    <p>
+                        <kbd>u</kbd> &nbsp; up to the index
+                    </p>
+                    <p>
+                        <kbd>?</kbd> &nbsp; show/hide this help
+                    </p>
+                </div>
+            </div>
+        </aside>
+        <h2>
+            <span class="text">32 statements &nbsp;</span>
+            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">31<span class="text"> run</span></button>
+            <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">1<span class="text"> missing</span></button>
+            <button type="button" class="exc show_exc button_toggle_exc" value="exc" data-shortcut="x" title="Toggle lines excluded">0<span class="text"> excluded</span></button>
+        </h2>
+        <p class="text">
+            <a id="prevFileLink" class="nav" href="z_d95e16bd23fe395d_schema_py.html">&#xab; prev</a> &nbsp; &nbsp;
+            <a id="indexLink" class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
+            <a id="nextFileLink" class="nav" href="index.html">&#xbb; next</a>
+            &nbsp; &nbsp; &nbsp;
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.14.3">coverage.py v7.14.3</a>,
+            created at 2026-07-09 14:35 +0000
+        </p>
+        <aside class="hidden">
+            <button type="button" class="button_next_chunk" data-shortcut="j"></button>
+            <button type="button" class="button_prev_chunk" data-shortcut="k"></button>
+            <button type="button" class="button_top_of_page" data-shortcut="0"></button>
+            <button type="button" class="button_first_chunk" data-shortcut="1"></button>
+            <button type="button" class="button_prev_file" data-shortcut="["></button>
+            <button type="button" class="button_next_file" data-shortcut="]"></button>
+            <button type="button" class="button_to_index" data-shortcut="u"></button>
+            <button type="button" class="button_show_hide_help" data-shortcut="?"></button>
+        </aside>
+    </div>
+</header>
+<main id="source">
+    <p class="pln"><span class="n"><a id="t1" href="#t1">1</a></span><span class="t"><span class="str">"""parameters/validators.py &#8212; &#44228;&#49328; &#51204; 6&#45800;&#44228; &#44160;&#51613; &#54028;&#51060;&#54532;&#46972;&#51064;.</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t2" href="#t2">2</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t3" href="#t3">3</a></span><span class="t"><span class="str">1. &#53440;&#51077; &#44160;&#51613;   : &#44050;&#51060; &#49707;&#51088;&#51064;&#44032; / INPUT &#51064;&#45936; &#48708;&#50612;&#51080;&#51648; &#50506;&#51008;&#44032;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t4" href="#t4">4</a></span><span class="t"><span class="str">2. &#45800;&#50948; &#44160;&#51613;   : &#45800;&#50948;&#44032; &#46321;&#47197;&#46104;&#50612; &#51080;&#45716;&#44032;(&#48120;&#46321;&#47197; &#45800;&#50948; &#44144;&#48512;)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t5" href="#t5">5</a></span><span class="t"><span class="str">3. &#48276;&#50948; &#44160;&#51613;   : min &lt;= value &lt;= max &#51064;&#44032;(&#47932;&#47532;&#51201; &#54620;&#44228;)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t6" href="#t6">6</a></span><span class="t"><span class="str">4. SI &#54872;&#49328;     : &#44221;&#44228;&#50640;&#49436; SI&#47196; &#48320;&#54872;&#54644; &#54028;&#46972;&#48120;&#53552;&#50640; &#51200;&#51109;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t7" href="#t7">7</a></span><span class="t"><span class="str">5. &#47932;&#47532; &#51068;&#44288;&#49457; : &#54028;&#46972;&#48120;&#53552; &#44036; &#49345;&#54840; &#51228;&#50557;(&#50696;: &#50728;&#46020;>0K, &#45453;&#46020;>0)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t8" href="#t8">8</a></span><span class="t"><span class="str">6. (&#49324;&#54980;) &#51088;&#44592;&#44160;&#51613; : &#44228;&#49328; &#54980; &#44208;&#44284; &#53440;&#45817;&#49457; &#44160;&#49324;&#45716; reactors &#51901; check_result() &#44032; &#45812;&#45817;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t9" href="#t9">9</a></span><span class="t"><span class="str">"""</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t10" href="#t10">10</a></span><span class="t"><span class="key">from</span> <span class="nam">__future__</span> <span class="key">import</span> <span class="nam">annotations</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t11" href="#t11">11</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t12" href="#t12">12</a></span><span class="t"><span class="key">from</span> <span class="nam">numbers</span> <span class="key">import</span> <span class="nam">Real</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t13" href="#t13">13</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t14" href="#t14">14</a></span><span class="t"><span class="key">from</span> <span class="op">.</span><span class="op">.</span><span class="nam">core</span> <span class="key">import</span> <span class="nam">units</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t15" href="#t15">15</a></span><span class="t"><span class="key">from</span> <span class="op">.</span><span class="nam">registry</span> <span class="key">import</span> <span class="nam">ParameterRegistry</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t16" href="#t16">16</a></span><span class="t"><span class="key">from</span> <span class="op">.</span><span class="nam">schema</span> <span class="key">import</span> <span class="nam">Parameter</span><span class="op">,</span> <span class="nam">Role</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t17" href="#t17">17</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t18" href="#t18">18</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t19" href="#t19">19</a></span><span class="t"><span class="key">class</span> <span class="nam">ValidationError</span><span class="op">(</span><span class="nam">ValueError</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t20" href="#t20">20</a></span><span class="t">    <span class="str">"""&#44160;&#51613; &#49892;&#54056;. message &#50640; &#50612;&#46500; &#54028;&#46972;&#48120;&#53552;&#44032; &#50780; &#53952;&#47160;&#45716;&#51648; &#45812;&#45716;&#45796;."""</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t21" href="#t21">21</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t22" href="#t22">22</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t23" href="#t23">23</a></span><span class="t"><span class="key">def</span> <span class="nam">_validate_one</span><span class="op">(</span><span class="nam">p</span><span class="op">:</span> <span class="nam">Parameter</span><span class="op">)</span> <span class="op">-></span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t24" href="#t24">24</a></span><span class="t">    <span class="str">"""&#54028;&#46972;&#48120;&#53552; &#54616;&#45208;&#50640; &#45824;&#54644; 1~5&#45800;&#44228;&#47484; &#49688;&#54665;&#54620;&#45796;."""</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t25" href="#t25">25</a></span><span class="t">    <span class="key">if</span> <span class="nam">p</span><span class="op">.</span><span class="nam">role</span> <span class="op">==</span> <span class="nam">Role</span><span class="op">.</span><span class="nam">DERIVED</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t26" href="#t26">26</a></span><span class="t">        <span class="key">return</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t27" href="#t27">27</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t28" href="#t28">28</a></span><span class="t">    <span class="key">if</span> <span class="nam">p</span><span class="op">.</span><span class="nam">value</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t29" href="#t29">29</a></span><span class="t">        <span class="key">raise</span> <span class="nam">ValidationError</span><span class="op">(</span><span class="fst">f"</span><span class="fst">[</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">label</span><span class="op">}</span><span class="fst">(</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">symbol</span><span class="op">}</span><span class="fst">)] &#44050;&#51060; &#48708;&#50612; &#51080;&#49845;&#45768;&#45796;.</span><span class="fst">"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t30" href="#t30">30</a></span><span class="t">    <span class="key">if</span> <span class="key">not</span> <span class="nam">isinstance</span><span class="op">(</span><span class="nam">p</span><span class="op">.</span><span class="nam">value</span><span class="op">,</span> <span class="nam">Real</span><span class="op">)</span> <span class="key">or</span> <span class="nam">isinstance</span><span class="op">(</span><span class="nam">p</span><span class="op">.</span><span class="nam">value</span><span class="op">,</span> <span class="nam">bool</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t31" href="#t31">31</a></span><span class="t">        <span class="key">raise</span> <span class="nam">ValidationError</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t32" href="#t32">32</a></span><span class="t">            <span class="fst">f"</span><span class="fst">[</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">label</span><span class="op">}</span><span class="fst">(</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">symbol</span><span class="op">}</span><span class="fst">)] &#49707;&#51088;&#44032; &#50500;&#45785;&#45768;&#45796;: </span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">value</span><span class="op">!</span><span class="nam">r</span><span class="op">}</span><span class="fst">"</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t33" href="#t33">33</a></span><span class="t">        <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t34" href="#t34">34</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t35" href="#t35">35</a></span><span class="t">    <span class="key">if</span> <span class="key">not</span> <span class="nam">units</span><span class="op">.</span><span class="nam">is_known_unit</span><span class="op">(</span><span class="nam">p</span><span class="op">.</span><span class="nam">unit</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t36" href="#t36">36</a></span><span class="t">        <span class="key">raise</span> <span class="nam">ValidationError</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t37" href="#t37">37</a></span><span class="t">            <span class="fst">f"</span><span class="fst">[</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">label</span><span class="op">}</span><span class="fst">(</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">symbol</span><span class="op">}</span><span class="fst">)] &#48120;&#46321;&#47197; &#45800;&#50948; '</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">unit</span><span class="op">}</span><span class="fst">'. </span><span class="fst">"</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t38" href="#t38">38</a></span><span class="t">            <span class="str">"core/units.py &#50640; &#52628;&#44032;&#54616;&#44144;&#45208; &#50732;&#48148;&#47480; &#45800;&#50948;&#47484; &#50416;&#49464;&#50836;."</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t39" href="#t39">39</a></span><span class="t">        <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t40" href="#t40">40</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t41" href="#t41">41</a></span><span class="t">    <span class="nam">v</span> <span class="op">=</span> <span class="nam">float</span><span class="op">(</span><span class="nam">p</span><span class="op">.</span><span class="nam">value</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t42" href="#t42">42</a></span><span class="t">    <span class="key">if</span> <span class="nam">p</span><span class="op">.</span><span class="nam">min</span> <span class="key">is</span> <span class="key">not</span> <span class="key">None</span> <span class="key">and</span> <span class="nam">v</span> <span class="op">&lt;</span> <span class="nam">p</span><span class="op">.</span><span class="nam">min</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis show_mis"><span class="n"><a id="t43" href="#t43">43</a></span><span class="t">        <span class="key">raise</span> <span class="nam">ValidationError</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis mis2 show_mis"><span class="n"><a id="t44" href="#t44">44</a></span><span class="t">            <span class="fst">f"</span><span class="fst">[</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">label</span><span class="op">}</span><span class="fst">(</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">symbol</span><span class="op">}</span><span class="fst">)] &#44050; </span><span class="op">{</span><span class="nam">v</span><span class="op">}</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">unit</span><span class="op">}</span><span class="fst"> &#51060; &#52572;&#49548; </span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">min</span><span class="op">}</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">unit</span><span class="op">}</span><span class="fst"> &#48372;&#45796; &#51089;&#49845;&#45768;&#45796;.</span><span class="fst">"</span>&nbsp;</span><span class="r"></span></p>
+    <p class="mis mis2 show_mis"><span class="n"><a id="t45" href="#t45">45</a></span><span class="t">        <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t46" href="#t46">46</a></span><span class="t">    <span class="key">if</span> <span class="nam">p</span><span class="op">.</span><span class="nam">max</span> <span class="key">is</span> <span class="key">not</span> <span class="key">None</span> <span class="key">and</span> <span class="nam">v</span> <span class="op">></span> <span class="nam">p</span><span class="op">.</span><span class="nam">max</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t47" href="#t47">47</a></span><span class="t">        <span class="key">raise</span> <span class="nam">ValidationError</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t48" href="#t48">48</a></span><span class="t">            <span class="fst">f"</span><span class="fst">[</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">label</span><span class="op">}</span><span class="fst">(</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">symbol</span><span class="op">}</span><span class="fst">)] &#44050; </span><span class="op">{</span><span class="nam">v</span><span class="op">}</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">unit</span><span class="op">}</span><span class="fst"> &#51060; &#52572;&#45824; </span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">max</span><span class="op">}</span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">unit</span><span class="op">}</span><span class="fst"> &#48372;&#45796; &#53373;&#45768;&#45796;.</span><span class="fst">"</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t49" href="#t49">49</a></span><span class="t">        <span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t50" href="#t50">50</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t51" href="#t51">51</a></span><span class="t">    <span class="nam">p</span><span class="op">.</span><span class="nam">_si_value</span> <span class="op">=</span> <span class="nam">units</span><span class="op">.</span><span class="nam">to_si</span><span class="op">(</span><span class="nam">v</span><span class="op">,</span> <span class="nam">p</span><span class="op">.</span><span class="nam">unit</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t52" href="#t52">52</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t53" href="#t53">53</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t54" href="#t54">54</a></span><span class="t"><span class="key">def</span> <span class="nam">_validate_physics</span><span class="op">(</span><span class="nam">reg</span><span class="op">:</span> <span class="nam">ParameterRegistry</span><span class="op">)</span> <span class="op">-></span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t55" href="#t55">55</a></span><span class="t">    <span class="str">"""5&#45800;&#44228;: &#54028;&#46972;&#48120;&#53552; &#44036; &#47932;&#47532; &#51068;&#44288;&#49457; &#44160;&#49324;(&#46321;&#47197;&#46108; &#44163;&#47564; &#44160;&#49324;)."""</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t56" href="#t56">56</a></span><span class="t">    <span class="nam">checks</span> <span class="op">=</span> <span class="op">{</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t57" href="#t57">57</a></span><span class="t">        <span class="str">"temperature"</span><span class="op">:</span> <span class="op">(</span><span class="str">"&#51208;&#45824;&#50728;&#46020;"</span><span class="op">,</span> <span class="key">lambda</span> <span class="nam">si</span><span class="op">:</span> <span class="nam">si</span> <span class="op">></span> <span class="num">0</span><span class="op">,</span> <span class="str">"0K&#48372;&#45796; &#52964;&#50556; &#54633;&#45768;&#45796;"</span><span class="op">)</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t58" href="#t58">58</a></span><span class="t">        <span class="str">"C_A0"</span><span class="op">:</span> <span class="op">(</span><span class="str">"&#52488;&#44592; &#45453;&#46020;"</span><span class="op">,</span> <span class="key">lambda</span> <span class="nam">si</span><span class="op">:</span> <span class="nam">si</span> <span class="op">></span> <span class="num">0</span><span class="op">,</span> <span class="str">"0&#48372;&#45796; &#52964;&#50556; &#54633;&#45768;&#45796;"</span><span class="op">)</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t59" href="#t59">59</a></span><span class="t">        <span class="str">"v0"</span><span class="op">:</span> <span class="op">(</span><span class="str">"&#48512;&#54588; &#50976;&#47049;"</span><span class="op">,</span> <span class="key">lambda</span> <span class="nam">si</span><span class="op">:</span> <span class="nam">si</span> <span class="op">></span> <span class="num">0</span><span class="op">,</span> <span class="str">"0&#48372;&#45796; &#52964;&#50556; &#54633;&#45768;&#45796;"</span><span class="op">)</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t60" href="#t60">60</a></span><span class="t">        <span class="str">"volume"</span><span class="op">:</span> <span class="op">(</span><span class="str">"&#48152;&#51025;&#44592; &#48512;&#54588;"</span><span class="op">,</span> <span class="key">lambda</span> <span class="nam">si</span><span class="op">:</span> <span class="nam">si</span> <span class="op">></span> <span class="num">0</span><span class="op">,</span> <span class="str">"0&#48372;&#45796; &#52964;&#50556; &#54633;&#45768;&#45796;"</span><span class="op">)</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t61" href="#t61">61</a></span><span class="t">        <span class="str">"tau"</span><span class="op">:</span> <span class="op">(</span><span class="str">"&#52404;&#47448;&#49884;&#44036;"</span><span class="op">,</span> <span class="key">lambda</span> <span class="nam">si</span><span class="op">:</span> <span class="nam">si</span> <span class="op">></span> <span class="num">0</span><span class="op">,</span> <span class="str">"0&#48372;&#45796; &#52964;&#50556; &#54633;&#45768;&#45796;"</span><span class="op">)</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t62" href="#t62">62</a></span><span class="t">    <span class="op">}</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t63" href="#t63">63</a></span><span class="t">    <span class="key">for</span> <span class="nam">key</span><span class="op">,</span> <span class="op">(</span><span class="nam">name</span><span class="op">,</span> <span class="nam">ok</span><span class="op">,</span> <span class="nam">msg</span><span class="op">)</span> <span class="key">in</span> <span class="nam">checks</span><span class="op">.</span><span class="nam">items</span><span class="op">(</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t64" href="#t64">64</a></span><span class="t">        <span class="key">if</span> <span class="nam">reg</span><span class="op">.</span><span class="nam">has</span><span class="op">(</span><span class="nam">key</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t65" href="#t65">65</a></span><span class="t">            <span class="nam">p</span> <span class="op">=</span> <span class="nam">reg</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="nam">key</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t66" href="#t66">66</a></span><span class="t">            <span class="key">if</span> <span class="nam">p</span><span class="op">.</span><span class="nam">role</span> <span class="op">!=</span> <span class="nam">Role</span><span class="op">.</span><span class="nam">DERIVED</span> <span class="key">and</span> <span class="nam">p</span><span class="op">.</span><span class="nam">_si_value</span> <span class="key">is</span> <span class="key">not</span> <span class="key">None</span> <span class="key">and</span> <span class="key">not</span> <span class="nam">ok</span><span class="op">(</span><span class="nam">p</span><span class="op">.</span><span class="nam">_si_value</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t67" href="#t67">67</a></span><span class="t">                <span class="key">raise</span> <span class="nam">ValidationError</span><span class="op">(</span><span class="fst">f"</span><span class="fst">[</span><span class="op">{</span><span class="nam">name</span><span class="op">}</span><span class="fst">] </span><span class="op">{</span><span class="nam">msg</span><span class="op">}</span><span class="fst">. (&#54788;&#51116; SI&#44050; </span><span class="op">{</span><span class="nam">p</span><span class="op">.</span><span class="nam">_si_value</span><span class="op">}</span><span class="fst">)</span><span class="fst">"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t68" href="#t68">68</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t69" href="#t69">69</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t70" href="#t70">70</a></span><span class="t"><span class="key">def</span> <span class="nam">validate_registry</span><span class="op">(</span><span class="nam">reg</span><span class="op">:</span> <span class="nam">ParameterRegistry</span><span class="op">)</span> <span class="op">-></span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t71" href="#t71">71</a></span><span class="t">    <span class="str">"""&#47112;&#51648;&#49828;&#53944;&#47532; &#51204;&#52404;&#47484; &#44160;&#51613;&#54620;&#45796;(&#44228;&#49328; &#51649;&#51204; &#48152;&#46300;&#49884; &#54840;&#52636;)."""</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t72" href="#t72">72</a></span><span class="t">    <span class="key">for</span> <span class="nam">p</span> <span class="key">in</span> <span class="nam">reg</span><span class="op">.</span><span class="nam">all</span><span class="op">(</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t73" href="#t73">73</a></span><span class="t">        <span class="nam">_validate_one</span><span class="op">(</span><span class="nam">p</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t74" href="#t74">74</a></span><span class="t">    <span class="nam">_validate_physics</span><span class="op">(</span><span class="nam">reg</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+</main>
+<footer>
+    <div class="content">
+        <p>
+            <a class="nav" href="z_d95e16bd23fe395d_schema_py.html">&#xab; prev</a> &nbsp; &nbsp;
+            <a class="nav" href="index.html">&Hat; index</a> &nbsp; &nbsp;
+            <a class="nav" href="index.html">&#xbb; next</a>
+            &nbsp; &nbsp; &nbsp;
+            <a class="nav" href="https://coverage.readthedocs.io/en/7.14.3">coverage.py v7.14.3</a>,
+            created at 2026-07-09 14:35 +0000
+        </p>
+    </div>
+</footer>
+</body>
+</html>
