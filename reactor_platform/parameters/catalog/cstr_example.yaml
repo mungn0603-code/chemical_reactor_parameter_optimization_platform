@@ -1,0 +1,105 @@
+# CSTR 예제 파라미터 카탈로그
+# 사용자는 이 파일의 값(value)/단위(unit)만 바꾸면 계산이 달라진다.
+# 코드에는 숫자가 없다 = 여기가 단일 진실 원천.
+
+- key: pre_exponential
+  label: 빈도인자
+  symbol: A
+  unit: "1/s"
+  role: input
+  description: Arrhenius 식의 빈도인자. 충돌 빈도·방향 인자를 반영한 상수(1차 반응 기준 1/s).
+  value: 1000000.0
+  min: 0
+  source: 예제값
+
+- key: activation_energy
+  label: 활성화 에너지
+  symbol: Ea
+  unit: "kJ/mol"
+  role: input
+  description: 반응이 일어나기 위해 넘어야 하는 최소 에너지 장벽. 클수록 온도 민감도가 큼.
+  value: 50
+  min: 0
+  max: 500
+  source: 예제값
+
+- key: temperature
+  label: 반응 온도
+  symbol: T
+  unit: "degC"
+  role: input
+  description: 반응기 운전 온도. 내부적으로 절대온도(K)로 변환되어 k 계산에 쓰인다.
+  value: 80
+  min: -273.15
+  source: 운전조건
+
+- key: reaction_order
+  label: 반응 차수
+  symbol: n
+  unit: "-"
+  role: input
+  description: 속도식 -r_A = k·C_A^n 의 지수. 1이면 해석해, 그 외는 수치해로 X를 구함.
+  value: 1
+  min: 0
+  max: 3
+  source: 반응 특성
+
+- key: C_A0
+  label: 초기 농도
+  symbol: C_A0
+  unit: "mol/L"
+  role: input
+  description: 반응기 입구에서 반응물 A의 농도. 출구농도·생산량 계산의 기준.
+  value: 2.0
+  min: 0
+  source: 운전조건
+
+- key: v0
+  label: 부피 유량
+  symbol: v0
+  unit: "L/min"
+  role: input
+  description: 반응기로 들어오는 부피 유량. 체류시간 tau = V/v0 계산에 쓰인다.
+  value: 10
+  min: 0
+  source: 운전조건
+
+- key: volume
+  label: 반응기 부피
+  symbol: V
+  unit: "L"
+  role: input
+  description: CSTR의 유효 반응 부피. 클수록 체류시간이 길어져 전환율이 올라간다.
+  value: 100
+  min: 0
+  source: 설계값
+
+- key: R
+  label: 기체 상수
+  symbol: R
+  unit: "J/mol"
+  role: constant
+  description: 이상기체 상수. Arrhenius 식의 분모에 쓰이는 물리 상수(잠금).
+  value: 8.314462618
+  source: CODATA
+
+- key: k
+  label: 속도상수
+  symbol: k
+  unit: "1/s"
+  role: derived
+  description: Arrhenius 식으로 온도에서 계산되는 반응 속도상수.
+
+- key: tau
+  label: 체류시간
+  symbol: tau
+  unit: "s"
+  role: derived
+  description: 반응물이 반응기에 머무는 평균 시간(V/v0).
+
+- key: X
+  label: 전환율
+  symbol: X
+  unit: "-"
+  role: derived
+  description: 반응물 A가 생성물로 전환된 비율(0~1).
