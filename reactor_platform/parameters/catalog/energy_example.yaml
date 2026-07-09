@@ -1,0 +1,128 @@
+# 에너지수지(heat duty) 예제 카탈로그 (M3)
+# CSTR 입력 + 에너지 입력을 함께 담는다. 사용자는 값/단위만 바꿜다.
+
+- key: pre_exponential
+  label: 빈도인자
+  symbol: A
+  unit: "1/s"
+  role: input
+  description: Arrhenius 빈도인자.
+  value: 1000000.0
+  min: 0
+  source: 예제값
+- key: activation_energy
+  label: 활성화 에너지
+  symbol: Ea
+  unit: "kJ/mol"
+  role: input
+  description: 반응 에너지 장벽.
+  value: 50
+  min: 0
+  max: 500
+  source: 예제값
+- key: temperature
+  label: 반응 온도
+  symbol: T
+  unit: "degC"
+  role: input
+  description: 반응기 운전 온도.
+  value: 80
+  min: -273.15
+  source: 운전조건
+- key: reaction_order
+  label: 반응 차수
+  symbol: n
+  unit: "-"
+  role: input
+  description: 속도식 지수.
+  value: 1
+  min: 0
+  max: 3
+  source: 반응 특성
+- key: C_A0
+  label: 초기 농도
+  symbol: C_A0
+  unit: "mol/L"
+  role: input
+  description: 입구 농도.
+  value: 2.0
+  min: 0
+  source: 운전조건
+- key: v0
+  label: 부피 유량
+  symbol: v0
+  unit: "L/min"
+  role: input
+  description: 공급 유량.
+  value: 10
+  min: 0
+  source: 운전조건
+- key: volume
+  label: 반응기 부피
+  symbol: V
+  unit: "L"
+  role: input
+  description: 유효 반응 부피.
+  value: 100
+  min: 0
+  source: 설계값
+- key: R
+  label: 기체 상수
+  symbol: R
+  unit: "J/mol"
+  role: constant
+  description: 이상기체 상수(잠금).
+  value: 8.314462618
+  source: CODATA
+- key: dH_rxn
+  label: 반응열
+  symbol: dH_rxn
+  unit: "kJ/mol"
+  role: input
+  description: 반응물 A 1 mol 당 반응열. 음수면 발열(냉각 필요), 양수면 흡열(가열 필요).
+  value: -80
+  min: -2000
+  max: 2000
+  source: 예제값
+- key: cp_flow
+  label: 공급 열용량 유량
+  symbol: cp_flow
+  unit: "W/K"
+  role: input
+  description: 공급물을 1 K 올리는 데 필요한 열유량. 현열항 계산에 쓰인다.
+  value: 500
+  min: 0
+  source: 예제값
+- key: T_feed
+  label: 공급 온도
+  symbol: T_feed
+  unit: "degC"
+  role: input
+  description: 반응기로 들어오는 공급물의 온도.
+  value: 25
+  min: -273.15
+  source: 운전조건
+- key: k
+  label: 속도상수
+  symbol: k
+  unit: "1/s"
+  role: derived
+  description: Arrhenius 속도상수.
+- key: tau
+  label: 체류시간
+  symbol: tau
+  unit: "s"
+  role: derived
+  description: 체류시간 V/v0.
+- key: X
+  label: 전환율
+  symbol: X
+  unit: "-"
+  role: derived
+  description: 전환율 0~1.
+- key: Q
+  label: 열부하
+  symbol: Q
+  unit: "W"
+  role: derived
+  description: 외부 열부하. 양수면 가열, 음수면 냉각.
