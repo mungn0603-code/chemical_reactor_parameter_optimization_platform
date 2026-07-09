@@ -44,7 +44,7 @@ python -m pip install --upgrade pip >nul 2>nul
 python -m pip install -r requirements.txt
 
 echo [4/4] Launching the app in your browser...
-python -m streamlit run app.py
+python -m streamlit run chemical_reactor_app.py
 
 echo.
 echo App stopped. Press any key to close.

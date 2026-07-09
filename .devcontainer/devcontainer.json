@@ -3,7 +3,7 @@
   "image": "mcr.microsoft.com/devcontainers/python:3.12",
   "postCreateCommand": "pip install -r requirements.txt",
   "postAttachCommand": {
-    "server": "streamlit run app.py --server.enableCORS false --server.enableXsrfProtection false"
+    "server": "streamlit run chemical_reactor_app.py --server.enableCORS false --server.enableXsrfProtection false"
   },
   "forwardPorts": [8501],
   "portsAttributes": {
