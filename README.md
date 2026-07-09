@@ -19,6 +19,9 @@ cd C:\Users\mungn
 git clone https://github.com/mungn0603-code/chemical_reactor_parameter_optimization_platform.git
 cd chemical_reactor_parameter_optimization_platform
 pip install -r requirements.txt
+streamlit run chemical_reactor_app.py --server.port 8502
+
+-> 나중에 코드 수정 후 고칠 아래처럼 고칠 예정
 streamlit run chemical_reactor_app.py
 ```
 
