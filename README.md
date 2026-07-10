@@ -9,17 +9,27 @@
 | reactor\_platform/core/energy.py                |       74 |        3 |     96% |114-115, 138 |
 | reactor\_platform/core/explain.py               |       27 |        0 |    100% |           |
 | reactor\_platform/core/kinetics.py              |       11 |        0 |    100% |           |
+| reactor\_platform/core/reactions.py             |      138 |       14 |     90% |35, 124, 136, 156-160, 174, 177, 186, 223-225, 231, 234 |
 | reactor\_platform/core/reactors/\_\_init\_\_.py |        3 |        0 |    100% |           |
 | reactor\_platform/core/reactors/base.py         |       45 |        1 |     98% |        73 |
 | reactor\_platform/core/reactors/cstr.py         |       73 |       12 |     84% |28, 38, 93-94, 116-117, 119-120, 122-123, 125-126 |
 | reactor\_platform/core/scenario\_lab.py         |       75 |        1 |     99% |        33 |
 | reactor\_platform/core/thermo.py                |       78 |        4 |     95% |27, 106-107, 130 |
 | reactor\_platform/core/units.py                 |       28 |        9 |     68% |62-64, 69, 75, 82-85 |
+| reactor\_platform/eda/\_\_init\_\_.py           |        8 |        0 |    100% |           |
+| reactor\_platform/eda/history.py                |       53 |        2 |     96% |    73, 80 |
+| reactor\_platform/eda/outlier.py                |       73 |       10 |     86% |48, 62, 76, 84-88, 118-120 |
+| reactor\_platform/eda/preprocessing.py          |      100 |       21 |     79% |80-81, 88, 95, 112, 128, 133, 135, 144-145, 147, 149, 160, 162, 164-165, 167-169, 175, 190 |
+| reactor\_platform/eda/profile.py                |      157 |        8 |     95% |64-67, 86, 88, 118, 175 |
+| reactor\_platform/eda/recommendation.py         |      129 |        8 |     94% |90-91, 121, 201, 227, 265-267 |
+| reactor\_platform/eda/report.py                 |      106 |        4 |     96% |110, 136, 175, 177 |
+| reactor\_platform/eda/sample.py                 |       24 |        0 |    100% |           |
+| reactor\_platform/eda/visualization.py          |       81 |        6 |     93% |50, 86-87, 92, 134, 138 |
 | reactor\_platform/parameters/\_\_init\_\_.py    |        4 |        0 |    100% |           |
 | reactor\_platform/parameters/registry.py        |       53 |       10 |     81% |29, 35, 47, 63, 81-86 |
 | reactor\_platform/parameters/schema.py          |       31 |        2 |     94% |    76, 82 |
 | reactor\_platform/parameters/validators.py      |       32 |        1 |     97% |        43 |
-| **TOTAL**                                       |  **535** |   **43** | **92%** |           |
+| **TOTAL**                                       | **1404** |  **116** | **92%** |           |
 
 
 ## Setup coverage badge
