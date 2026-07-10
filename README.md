@@ -9,7 +9,7 @@
 | reactor\_platform/core/energy.py                |       74 |        3 |     96% |114-115, 138 |
 | reactor\_platform/core/explain.py               |       27 |        0 |    100% |           |
 | reactor\_platform/core/kinetics.py              |       11 |        0 |    100% |           |
-| reactor\_platform/core/reactions.py             |      138 |       14 |     90% |35, 124, 136, 156-160, 174, 177, 186, 223-225, 231, 234 |
+| reactor\_platform/core/reactions.py             |      147 |       14 |     90% |35, 124, 136, 156-160, 174, 177, 186, 223-225, 231, 234 |
 | reactor\_platform/core/reactors/\_\_init\_\_.py |        3 |        0 |    100% |           |
 | reactor\_platform/core/reactors/base.py         |       45 |        1 |     98% |        73 |
 | reactor\_platform/core/reactors/cstr.py         |       73 |       12 |     84% |28, 38, 93-94, 116-117, 119-120, 122-123, 125-126 |
@@ -29,7 +29,7 @@
 | reactor\_platform/parameters/registry.py        |       53 |       10 |     81% |29, 35, 47, 63, 81-86 |
 | reactor\_platform/parameters/schema.py          |       31 |        2 |     94% |    76, 82 |
 | reactor\_platform/parameters/validators.py      |       32 |        1 |     97% |        43 |
-| **TOTAL**                                       | **1404** |  **116** | **92%** |           |
+| **TOTAL**                                       | **1413** |  **116** | **92%** |           |
 
 
 ## Setup coverage badge
