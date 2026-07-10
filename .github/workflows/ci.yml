@@ -45,7 +45,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-      - run: pip install pytest pytest-cov PyYAML
+      - run: pip install -r requirements.txt pytest-cov
       - run: pytest reactor_platform/tests --cov=reactor_platform --cov-report=term-missing
 
   coverage:
@@ -60,7 +60,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install pytest pytest-cov PyYAML
+      - run: pip install -r requirements.txt pytest-cov
       - run: pytest reactor_platform/tests --cov=reactor_platform
       - name: Generate coverage badge & PR comment
         uses: py-cov-action/python-coverage-comment-action@v3
