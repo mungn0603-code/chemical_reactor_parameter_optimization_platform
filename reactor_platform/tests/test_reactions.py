@@ -8,12 +8,14 @@ import math
 import pytest
 
 from reactor_platform.core.reactions import (
+    KINETICS_DB,
     REACTION_LIBRARY,
     ReactionError,
     analyze_reaction,
     element_balance,
     parse_formula,
     parse_reaction,
+    reaction_kinetics,
     reaction_thermochemistry,
 )
 
@@ -113,3 +115,34 @@ def test_library_reactions_parse_and_balance(named):
     ok, residual = element_balance(r.reaction)
     assert ok, f"{named.name} 불균형: {residual}"
     assert r.steps  # 유도 과정이 기록됨
+
+
+# --- 반응속도(Arrhenius) 파라미터 라이브러리 -------------------------------- #
+def test_reaction_kinetics_known_reaction():
+    k = reaction_kinetics("암모니아 합성 (Haber–Bosch)")
+    assert k is not None
+    assert k.A > 0 and k.Ea > 0 and k.order >= 1
+    assert k.source  # 출처/비고가 반드시 있어야 함(자기설명)
+
+
+def test_reaction_kinetics_unknown_returns_none():
+    assert reaction_kinetics("(직접 입력)") is None
+    assert reaction_kinetics("포도당 완전연소") is None  # kinetics DB 에 없음
+
+
+def test_kinetics_db_entries_are_physical():
+    for name, k in KINETICS_DB.items():
+        assert k.A > 0, name
+        assert 0 < k.Ea < 1000, name  # kJ/mol 범위
+        assert k.order >= 0, name
+        assert k.source.strip(), name
+
+
+def test_kinetics_reflects_arrhenius_temperature_dependence():
+    from reactor_platform.core.kinetics import arrhenius_k
+
+    k = reaction_kinetics("암모니아 합성 (Haber–Bosch)")
+    k_low = arrhenius_k(k.A, k.Ea * 1000, 353.15)   # 80 °C
+    k_high = arrhenius_k(k.A, k.Ea * 1000, 673.15)   # 400 °C
+    # Arrhenius: 온도가 오르면 속도상수가 커진다.
+    assert k_high > k_low

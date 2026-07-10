@@ -315,3 +315,47 @@ REACTION_LIBRARY: list[NamedReaction] = [
     NamedReaction("포도당 완전연소", "C6H12O6(s) + 6 O2 -> 6 CO2 + 6 H2O(l)",
                   "대사·연소의 기준 반응."),
 ]
+
+
+# --------------------------------------------------------------------------- #
+# 반응속도(Arrhenius) 파라미터 라이브러리
+# --------------------------------------------------------------------------- #
+# ⚠ 중요: 열역학(ΔH·ΔS)은 Hess 법칙으로 반응식에서 '계산'되지만, 반응속도 파라미터
+# (빈도인자 A·활성화에너지 Ea)는 반응식만으로는 유도되지 않는 '실험적으로 측정되는'
+# 값이다(촉매·담체·압력·조건에 따라 크게 달라짐). 따라서 여기서는 문헌에서 통용되는
+# '대표(apparent) 값'을 표로 두고, 반응 선택 시 A·Ea·차수를 반영한다. 값은 교육용
+# 대표 스케일이며 특정 촉매/조건의 정밀 kinetics 가 아니다(각 항목 source 참조).
+@dataclass(frozen=True)
+class Kinetics:
+    """하나의 반응에 대한 대표 Arrhenius 반응속도 파라미터."""
+
+    A: float       # 빈도인자(전지수인자) [1/s]
+    Ea: float      # 활성화에너지 [kJ/mol]
+    order: float   # 반응차수(n)
+    source: str    # 출처/촉매·근사 비고
+
+
+# 키: REACTION_LIBRARY 의 반응 이름. 값: 대표 문헌 kinetics(교육용).
+KINETICS_DB: dict[str, Kinetics] = {
+    "암모니아 합성 (Haber–Bosch)":
+        Kinetics(A=8.8e14, Ea=160.0, order=1, source="Fe 촉매, apparent Ea≈150~200 kJ/mol 범위 대표값"),
+    "메탄 완전연소":
+        Kinetics(A=1.1e11, Ea=125.0, order=1, source="전역(global) 연소 반응 근사 대표값"),
+    "수성가스 전환 (WGS)":
+        Kinetics(A=1.0e7, Ea=75.0, order=1, source="Fe–Cr 고온전환(HTS) 촉매 대표값"),
+    "SO2 산화 (접촉법)":
+        Kinetics(A=1.0e9, Ea=90.0, order=1, source="V2O5 촉매 대표값"),
+    "에틸렌 수소화":
+        Kinetics(A=1.0e6, Ea=40.0, order=1, source="금속(Ni/Pt) 촉매 대표값, 낮은 Ea"),
+    "메탄올 합성":
+        Kinetics(A=1.0e8, Ea=85.0, order=1, source="Cu/ZnO/Al2O3 촉매 대표값"),
+    "에탄올 완전연소":
+        Kinetics(A=1.1e11, Ea=125.0, order=1, source="전역 연소 반응 근사 대표값"),
+    "일산화질소 생성":
+        Kinetics(A=1.0e13, Ea=280.0, order=1, source="Zeldovich 열적 NO, 매우 높은 Ea(강흡열)"),
+}
+
+
+def reaction_kinetics(name: str) -> Kinetics | None:
+    """반응 이름으로 대표 반응속도 파라미터를 찾는다. 없으면 None(수동 입력 필요)."""
+    return KINETICS_DB.get(name)

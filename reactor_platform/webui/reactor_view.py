@@ -21,6 +21,7 @@ from reactor_platform.core.reactions import (
     ReactionError,
     analyze_reaction,
     element_balance,
+    reaction_kinetics,
 )
 from reactor_platform.core.reactors.cstr import CSTR
 from reactor_platform.core.thermo import ThermoAnalyzer
@@ -47,8 +48,8 @@ def _state() -> dict:
 def render() -> None:
     """반응기 계산 뷰 전체를 그린다."""
     st.header("🧪 반응기 계산 · M1 → M2 → M3")
-    st.caption("각 단계를 순서대로 진행하세요. M2 에서 반응식을 고르면 반응 엔탈피·엔트로피가 "
-               "교과서(Hess 법칙)대로 자동 계산되어 M2·M3 에 설정됩니다.")
+    st.caption("반응식을 고르면 M1 에서는 반응속도 파라미터(A·Ea·차수, 문헌 대표값)가, "
+               "M2 에서는 반응 엔탈피·엔트로피(Hess 법칙 계산)가 자동 반영됩니다.")
 
     vals = _state()
     step = st.radio("단계", _STEPS, horizontal=True, label_visibility="collapsed")
@@ -63,16 +64,60 @@ def render() -> None:
 
 
 # --------------------------------------------------------------------------- #
+# 공유 반응 선택기 (M1·M2 가 같은 반응을 사용하도록 세션에 저장)
+# --------------------------------------------------------------------------- #
+def _pick_reaction(widget_key: str) -> tuple[str, str]:
+    """대표 반응 선택 위젯. (선택 이름, 반응식) 반환. 선택은 세션에 저장돼 M1·M2 공유."""
+    names = ["(직접 입력)"] + [nr.name for nr in REACTION_LIBRARY]
+    stored = st.session_state.get("rx_reaction_name", REACTION_LIBRARY[0].name)
+    idx = names.index(stored) if stored in names else 0
+    choice = st.selectbox("대표 반응 선택", names, index=idx, key=widget_key,
+                          help="교과서 대표 반응을 고르거나 직접 반응식을 입력하세요.")
+    st.session_state["rx_reaction_name"] = choice
+    if choice == "(직접 입력)":
+        default_eq = st.session_state.get("rx_reaction_eq", "N2 + 3 H2 -> 2 NH3")
+        eq = st.text_input("반응식 입력", value=default_eq, key=widget_key + "_eq",
+                           help="예: N2 + 3 H2 -> 2 NH3  ·  CH4 + 2 O2 -> CO2 + 2 H2O(g)")
+    else:
+        nr = next(n for n in REACTION_LIBRARY if n.name == choice)
+        eq = nr.equation
+        st.caption(f"선택: `{nr.equation}` — {nr.note}")
+    st.session_state["rx_reaction_eq"] = eq
+    return choice, eq
+
+
+# --------------------------------------------------------------------------- #
 # M1 · 반응속도론 / CSTR
 # --------------------------------------------------------------------------- #
 def _step_m1(vals: dict) -> None:
     st.subheader("M1 · 반응속도론 & 등온 CSTR")
+
+    st.markdown("**반응 선택** — 반응을 고르면 빈도인자 A·활성화에너지 Ea·반응차수가 "
+                "문헌 대표값으로 자동 반영됩니다.")
+    name, _eq = _pick_reaction("m1_rxn")
+    kin = reaction_kinetics(name)
+
+    auto = False
+    if kin is not None:
+        manual = st.checkbox("A·Ea·차수를 직접 수정(수동 입력)", value=False, key="m1_manual")
+        auto = not manual
+        if auto:
+            vals["A"], vals["Ea"], vals["n"] = kin.A, kin.Ea, kin.order
+            st.success(f"반응속도 자동 반영: A = {kin.A:.3g} 1/s · Ea = {kin.Ea:g} kJ/mol · "
+                       f"n = {kin.order:g}")
+            st.caption(f"↳ 출처: {kin.source}  ·  ⚠ A·Ea 는 반응식에서 유도되는 값이 아니라 "
+                       "촉매·조건에 따라 달라지는 **실험값(대표 스케일)** 입니다.")
+    else:
+        st.info("이 반응의 문헌 반응속도(A·Ea) 데이터가 없어 아래에서 직접 입력합니다.")
+
     c1, c2, c3 = st.columns(3)
-    vals["A"] = c1.number_input("빈도인자 A [1/s]", value=float(vals["A"]), format="%.1f")
-    vals["Ea"] = c2.number_input("활성화에너지 Ea [kJ/mol]", value=float(vals["Ea"]))
+    vals["A"] = c1.number_input("빈도인자 A [1/s]", value=float(vals["A"]),
+                                format="%.6g", disabled=auto)
+    vals["Ea"] = c2.number_input("활성화에너지 Ea [kJ/mol]", value=float(vals["Ea"]),
+                                 disabled=auto)
     vals["T"] = c3.slider("반응온도 T [°C]", -50.0, 400.0, float(vals["T"]))
     vals["n"] = c1.number_input("반응차수 n [-]", value=float(vals["n"]),
-                                min_value=0.0, max_value=3.0, step=1.0)
+                                min_value=0.0, max_value=3.0, step=1.0, disabled=auto)
     vals["C_A0"] = c2.number_input("초기농도 C_A0 [mol/L]", value=float(vals["C_A0"]), min_value=0.0)
     vals["v0"] = c3.number_input("부피유량 v0 [L/min]", value=float(vals["v0"]), min_value=0.0)
     vals["V"] = c1.number_input("반응기부피 V [L]", value=float(vals["V"]), min_value=0.0)
@@ -97,18 +142,9 @@ def _step_m1(vals: dict) -> None:
 # --------------------------------------------------------------------------- #
 def _step_m2(vals: dict) -> None:
     st.subheader("M2 · 열역학 (반응식 입력 → 자동 설정)")
+    st.caption("M1 과 같은 반응식을 사용합니다. 여기서 바꾸면 M1 의 반응속도도 함께 바뀝니다.")
 
-    names = ["(직접 입력)"] + [nr.name for nr in REACTION_LIBRARY]
-    choice = st.selectbox("대표 반응 선택", names,
-                          help="교과서 대표 반응을 고르거나 직접 반응식을 입력하세요.")
-    if choice == "(직접 입력)":
-        default_eq = st.session_state.get("rx_reaction_eq", "N2 + 3 H2 -> 2 NH3")
-        eq = st.text_input("반응식 입력", value=default_eq,
-                           help="예: N2 + 3 H2 -> 2 NH3  ·  CH4 + 2 O2 -> CO2 + 2 H2O(g)")
-    else:
-        nr = next(n for n in REACTION_LIBRARY if n.name == choice)
-        eq = nr.equation
-        st.caption(f"선택: `{nr.equation}` — {nr.note}")
+    _name, eq = _pick_reaction("m2_rxn")
 
     T_abs = float(vals["T"]) + 273.15
     try:
